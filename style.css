@@ -17,18 +17,17 @@ body {
 }
 
 button {
- position: absolute;
- color: #fff;
- background-color: #f44336;
- border-radius: 5px;
- cursor:pointer;
- width:150px;
- height:40px;
-font-size: 20px;
-top: 35px;
-left: 680px;
-text-align: center;
-
+  position: absolute;
+  color: #fff;
+  background-color: #f44336;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 150px;
+  height: 40px;
+  font-size: 20px;
+  top: 35px;
+  left: 680px;
+  text-align: center;
 }
 
 .start-btn span {
@@ -118,8 +117,12 @@ text-align: center;
   border: 5px solid #2196f3;
 }
 
-.memory-game .game-block.flipped, .memory-game .game-block.match {
+.memory-game .game-block.flipped,
+.memory-game .game-block.match {
   -webkit-transform: rotateY(180deg);
   -moz-transform: rotateY(180deg);
   transform: rotateY(180deg);
+}
+
+@media only screen and (device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) {
 }
