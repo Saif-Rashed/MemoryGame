@@ -1,6 +1,13 @@
 // Splash Screen function
 
+const instructions = document.querySelector(".instructions");
+// hide instructions by default
+instructions.classList.add("hidden");
+
 document.querySelector(".start-btn span").onclick = function () {
+  // show instructions
+  instructions.classList.remove("hidden");
+
   const name = prompt("PLEASE ENTER YOUR NAME");
   if (name == null || name == "") {
     document.querySelector(".name span").innerHTML = "Unknown";
@@ -9,6 +16,9 @@ document.querySelector(".start-btn span").onclick = function () {
   }
 
   document.querySelector(".start-btn").remove();
+
+  // start the timer
+  startTimer();
 };
 
 const duration = 1000;
@@ -33,9 +43,9 @@ function flipBlock(selectedBlock) {
   selectedBlock.classList.add("flipped");
 
   // Collect all flipped cards
-  let allFlippedBlocks = blocks.filter(flippedBlock =>
-    flippedBlock.classList.contains("flipped"));
-    
+  let allFlippedBlocks = blocks.filter((flippedBlock) =>
+    flippedBlock.classList.contains("flipped")
+  );
 
   // If there are two selected blocks
   if (allFlippedBlocks.length === 2) {
@@ -68,8 +78,9 @@ function checkMatchedBlocks(firstBlock, secondBlock) {
 
     firstBlock.classList.add("match");
     secondBlock.classList.add("match");
-
-
+    // update the score
+    let scoreElement = document.querySelector("#score span");
+    scoreElement.innerHTML = parseInt(scoreElement.innerHTML) + 1;
   } else {
     triesElement.innerHTML = parseInt(triesElement.innerHTML) + 1;
     setTimeout(() => {
@@ -99,7 +110,7 @@ function shuffle(array) {
 // Restart Button
 document.querySelector(".restart").onclick = function () {
   // Delete all classes from blocks
-  blocks.forEach(block => {
+  blocks.forEach((block) => {
     block.classList.remove("flipped", "match");
   });
 
@@ -113,5 +124,34 @@ document.querySelector(".restart").onclick = function () {
 
   // Reset tries
   document.querySelector(".tries span").innerHTML = 0;
+};
+
+// function for timer
+function startTimer() {
+  let timer = 60;
+  let timerInterval = setInterval(function () {
+    timer--;
+    document.querySelector("#timer span ").innerHTML = timer;
+    if (timer == 0) {
+      clearInterval(timerInterval);
+      alert("Time is up! Game over.");
+    }
+  }, 1000);
 }
 
+// function for game difficulty
+
+const gameModes = {
+  easy: {
+    duration: 60,
+    numBlocks: 16,
+  },
+  medium: {
+    duration: 45,
+    numBlocks: 24,
+  },
+  hard: {
+    duration: 30,
+    numBlocks: 32,
+  },
+};

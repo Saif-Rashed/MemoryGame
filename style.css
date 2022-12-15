@@ -123,3 +123,13 @@ button {
   -moz-transform: rotateY(180deg);
   transform: rotateY(180deg);
 }
+
+.instructions {
+  font-size: 24px;
+  text-align: center;
+  color: #333;
+}
+
+.hidden {
+  display: none;
+}
