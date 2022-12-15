@@ -109,22 +109,48 @@ function shuffle(array) {
 
 // Restart Button
 document.querySelector(".restart").onclick = function () {
-  // Delete all classes from blocks
+  resetGame();
+};
+
+// function for game reset
+
+function resetGame() {
+  // clear the timer interval
+  clearInterval(timerInterval);
+
+  // reset the timer
+  timer = duration;
+  document.querySelector("#timer span").innerHTML = timer;
+
+  // reset the score
+  document.querySelector("#score span").innerHTML = 0;
+
+  // reset the tries
+  document.querySelector(".tries span").innerHTML = 0;
+
+  // delete all classes from blocks
   blocks.forEach((block) => {
     block.classList.remove("flipped", "match");
   });
 
-  // Shuffle the game blocks
+  // shuffle the game blocks
   shuffle(orderRange);
 
-  // Add order CSS property to game blocks
+  // add order CSS property to game blocks
   blocks.forEach((block, index) => {
     block.style.order = orderRange[index];
   });
 
-  // Reset tries
-  document.querySelector(".tries span").innerHTML = 0;
-};
+  // start the timer again
+  startTimer();
+}
+// Shuffle the game blocks
+shuffle(orderRange);
+
+// Add order CSS property to game blocks
+blocks.forEach((block, index) => {
+  block.style.order = orderRange[index];
+});
 
 // function for timer
 function startTimer() {
@@ -138,20 +164,3 @@ function startTimer() {
     }
   }, 1000);
 }
-
-// function for game difficulty
-
-const gameModes = {
-  easy: {
-    duration: 60,
-    numBlocks: 16,
-  },
-  medium: {
-    duration: 45,
-    numBlocks: 24,
-  },
-  hard: {
-    duration: 30,
-    numBlocks: 32,
-  },
-};
